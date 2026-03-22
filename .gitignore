@@ -1,0 +1,21 @@
+# .NET Core
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+appsettings.Development.json
+
+# Node/Angular
+node_modules/
+dist/
+.angular/
+npm-debug.log
+yarn-error.log
+
+# VS / VS Code
+.vscode/
+.idea/
+*.swp
+*.~
