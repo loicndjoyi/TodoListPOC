@@ -19,3 +19,11 @@ yarn-error.log
 .idea/
 *.swp
 *.~
+
+# SQLite Database
+*.db
+*.db-shm
+*.db-wal
+
+# macOS
+.DS_Store
