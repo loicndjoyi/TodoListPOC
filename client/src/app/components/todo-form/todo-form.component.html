@@ -1,0 +1,30 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="todo-form">
+  <div class="input-row">
+    <input
+      type="text"
+      formControlName="title"
+      placeholder="What needs to be done?"
+      class="todo-input"
+      aria-label="Todo title"
+    />
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      {{ initialTitle() ? 'Update' : 'Add' }}
+    </button>
+    @if (initialTitle()) {
+      <button type="button" class="btn btn-ghost" (click)="onCancel()">Cancel</button>
+    }
+  </div>
+
+  <div class="form-feedback">
+    @if (titleControl.invalid && titleControl.dirty) {
+      @if (titleControl.errors?.['required']) {
+        <span class="error-msg">Title is required.</span>
+      } @else if (titleControl.errors?.['maxlength']) {
+        <span class="error-msg">Title cannot exceed 200 characters.</span>
+      }
+    }
+    <span class="char-count" [class.warn]="remainingChars <= 20">
+      {{ remainingChars }} / 200
+    </span>
+  </div>
+</form>
