@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TodoApp.Core;
 
 namespace TodoApp.Infrastructure;
@@ -9,7 +9,7 @@ public class AppDbContext : DbContext
     {
     }
 
-    public required DbSet<TodoItem> TodoItems { get; set; }
+    public DbSet<TodoItem> TodoItems => Set<TodoItem>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
