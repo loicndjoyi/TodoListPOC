@@ -285,3 +285,15 @@ app.UseCors("AllowAngularClient");
 app.UseHttpsRedirection();
 ```
 
+## 12. Angular 21: Runtime Environment Detection without `environments/`
+
+Modern Angular CLI workspaces (v15+) do not generate an `environments/` directory by default to keep the workspace simple. Rather than manually configuring proxy files or restoring the environment infrastructure for a simple endpoint swap, the cleanest native approach is using `@angular/core`'s `isDevMode()`.
+
+```typescript
+import { isDevMode } from '@angular/core';
+
+export class TodoService {
+  // Uses absolute path for ng serve, and relative path automatically after 'ng build'
+  private baseUrl = isDevMode() ? 'http://localhost:5118/api/todos' : '/api/todos';
+}
+```
