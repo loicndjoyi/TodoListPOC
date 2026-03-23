@@ -11,7 +11,7 @@ Detailed further in `docs/adr/` (Architecture Decision Records) and `IMPROVEMENT
 * **Backend (.NET 8)**: Layered architecture (Service Layer) oriented around the "Tell, Don't Ask" principle with clear separation of concerns (SRP, DIP). Includes a *Global Exception Handler* (RFC 7807) to return uniform API errors. EF Core is configured with SQLite for embedded persistence with zero external infrastructure dependencies.
 * **Frontend (Angular 21)**: Built with *Standalone* components, leveraging *Signals* for reactive local state with `ChangeDetectionStrategy.OnPush`, and maintaining a clean data flow with a centralized HTTP service and error interceptor.
 * **Testing Pyramid**: Unit tests for domain logic (xUnit + NSubstitute + FluentAssertions), integration tests for API endpoints (`WebApplicationFactory` with in-memory SQLite).
-* **CI/CD**: GitHub Actions to validate tests and build both projects on every push.
+* **CI/CD**: GitHub Actions for continuous integration (tests + build on every push to `main`) and automated deployment to Azure App Service.
 
 ## Project Structure
 
@@ -75,4 +75,5 @@ npx tsc --noEmit
 |---|---|
 | [`docs/adr/`](docs/adr/) | Architecture Decision Records |
 | [`docs/learning.md`](docs/learning.md) | Technical learnings & patterns |
-| [`IMPROVEMENTS.md`](IMPROVEMENTS.md) | Future improvements roadmap |
+| [`IMPROVEMENTS.md`](IMPROVEMENTS.md) | Future improvements & known limitations |
+| [`.github/workflows/`](.github/workflows/) | CI (`ci.yml`) and CD (`deploy.yml`) pipelines |
