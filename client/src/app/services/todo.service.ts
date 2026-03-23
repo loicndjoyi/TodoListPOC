@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject, isDevMode } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Todo } from '../models/todo.model';
@@ -6,7 +6,7 @@ import { Todo } from '../models/todo.model';
 @Injectable({ providedIn: 'root' })
 export class TodoService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:5118/api/todos';
+  private baseUrl = isDevMode() ? 'http://localhost:5118/api/todos' : '/api/todos';
 
   getAll(): Observable<Todo[]> {
     return this.http.get<Todo[]>(this.baseUrl);
