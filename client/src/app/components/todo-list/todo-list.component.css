@@ -1,5 +1,11 @@
-.list-container {
+:host {
+  display: block;
+  width: 100%;
   max-width: 640px;
+}
+
+.list-container {
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -19,7 +25,6 @@
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin: 0;
 }
 
 .list-stats {
@@ -64,8 +69,6 @@
 /* Todo list */
 .todo-list {
   list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -97,11 +100,7 @@
   flex-shrink: 0;
   cursor: pointer;
   accent-color: var(--accent);
-  margin-top: 0.25rem; /* Aligns with text in non-edit mode */
-}
-
-.todo-item.editing .todo-checkbox {
-  margin-top: 0.8rem; /* Aligns with the taller input field in edit mode */
+  margin-top: 0.8rem; /* Perfectly aligns with the padded title/input */
 }
 
 .todo-title {
@@ -109,26 +108,33 @@
   font-size: 0.95rem;
   color: var(--text-primary);
   word-break: break-word;
+  padding: 0.6rem 0.9rem; /* Exactly matches .todo-input padding */
+  border: 1.5px solid transparent; /* Exactly matches .todo-input border */
 }
 
 .inline-edit {
   flex: 1;
 }
 
-/* Actions */
 .todo-actions {
   display: flex;
   gap: 0.25rem;
   opacity: 0;
   transition: opacity 0.15s;
-  margin-top: 0.2rem;
+  margin-top: 0.6rem; /* Aligns perfectly with the input and new title padding */
+  width: 10.5rem; /* Exactly matches the 5rem + 5rem + 0.5rem gap of the edit mode buttons */
+  justify-content: flex-end; /* keep the icons glued to the right */
+}
+
+/* Spacer for Add form to perfectly align with edit mode */
+.todo-checkbox-spacer {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 0.8rem; /* Matches .todo-checkbox in edit mode */
 }
 
 .todo-item:hover .todo-actions,
 .todo-item:focus-within .todo-actions {
   opacity: 1;
-}
-
-.add-section {
-  padding: 0.25rem 0;
 }

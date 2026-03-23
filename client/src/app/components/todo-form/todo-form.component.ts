@@ -18,6 +18,7 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angula
 })
 export class TodoFormComponent implements OnChanges {
   readonly initialTitle = input('');
+  readonly showFeedback = input(true);
   readonly save = output<string>();
   readonly cancel = output<void>();
 

@@ -4,9 +4,9 @@
   <header class="list-header">
     <h1 class="list-title">My Todos</h1>
     <div class="list-stats">
-      <span class="stat stat-done">{{ completedCount() }} done</span>
+      <span class="stat-done">{{ completedCount() }} done</span>
       <span class="stat-sep">·</span>
-      <span class="stat stat-pending">{{ incompleteCount() }} remaining</span>
+      <span class="stat-pending">{{ incompleteCount() }} remaining</span>
     </div>
   </header>
 
@@ -19,8 +19,11 @@
   }
 
   <!-- Add form -->
-  <section class="add-section" aria-label="Add a new todo">
-    <app-todo-form (save)="createTodo($event)" />
+  <section class="todo-item" aria-label="Add a new todo">
+    <div class="todo-checkbox-spacer"></div>
+    <div class="inline-edit">
+      <app-todo-form (save)="createTodo($event)" />
+    </div>
   </section>
 
   <!-- Loading -->
@@ -55,6 +58,7 @@
             <div class="inline-edit">
               <app-todo-form
                 [initialTitle]="todo.title"
+                [showFeedback]="false"
                 (save)="updateTodo(todo.id, $event)"
                 (cancel)="cancelEdit()"
               />
