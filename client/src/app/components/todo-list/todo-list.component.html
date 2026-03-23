@@ -1,0 +1,93 @@
+<div class="list-container">
+
+  <!-- Header -->
+  <header class="list-header">
+    <h1 class="list-title">My Todos</h1>
+    <div class="list-stats">
+      <span class="stat-done">{{ completedCount() }} done</span>
+      <span class="stat-sep">·</span>
+      <span class="stat-pending">{{ incompleteCount() }} remaining</span>
+    </div>
+  </header>
+
+  <!-- Error banner -->
+  @if (errorMessage()) {
+    <div class="error-banner" role="alert">
+      <span>⚠ {{ errorMessage() }}</span>
+      <button class="btn btn-ghost dismiss-btn" (click)="dismissError()" aria-label="Dismiss error">✕</button>
+    </div>
+  }
+
+  <!-- Add form -->
+  <section class="todo-item" aria-label="Add a new todo">
+    <div class="todo-checkbox-spacer"></div>
+    <div class="inline-edit">
+      <app-todo-form (save)="createTodo($event)" />
+    </div>
+  </section>
+
+  <!-- Loading -->
+  @if (isLoading()) {
+    <div class="loading" aria-live="polite">Loading…</div>
+  }
+
+  <!-- Empty state -->
+  @if (!isLoading() && todos().length === 0) {
+    <div class="empty-state">
+      <p>🎉 Nothing to do! Add a task above.</p>
+    </div>
+  }
+
+  <!-- Todo list -->
+  @if (!isLoading() && todos().length > 0) {
+    <ul class="todo-list" aria-label="Todo items">
+      @for (todo of todos(); track todo.id) {
+        <li class="todo-item" [class.completed]="todo.isCompleted" [class.editing]="editingId() === todo.id">
+
+          <!-- Checkbox -->
+          <input
+            type="checkbox"
+            class="todo-checkbox"
+            [checked]="todo.isCompleted"
+            (change)="toggleComplete(todo)"
+            [attr.aria-label]="'Mark ' + todo.title + ' as ' + (todo.isCompleted ? 'incomplete' : 'complete')"
+          />
+
+          <!-- Title or inline edit form -->
+          @if (editingId() === todo.id) {
+            <div class="inline-edit">
+              <app-todo-form
+                [initialTitle]="todo.title"
+                [showFeedback]="false"
+                (save)="updateTodo(todo.id, $event)"
+                (cancel)="cancelEdit()"
+              />
+            </div>
+          } @else {
+            <span class="todo-title">{{ todo.title }}</span>
+          }
+
+          <!-- Actions (hidden when editing) -->
+          @if (editingId() !== todo.id) {
+            <div class="todo-actions">
+              <button
+                class="btn btn-icon"
+                (click)="startEdit(todo.id)"
+                aria-label="Edit todo"
+                title="Edit"
+              ><span aria-hidden="true">✏️</span></button>
+              <button
+                class="btn btn-icon btn-danger"
+                (click)="deleteTodo(todo.id)"
+                aria-label="Delete todo"
+                title="Delete"
+              ><span aria-hidden="true">🗑️</span></button>
+            </div>
+          }
+
+        </li>
+      }
+    </ul>
+  }
+
+</div>

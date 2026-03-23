@@ -1,1 +1,121 @@
-/* You can add global styles to this file, and also import other style files */
+/* ===========================
+   Design Tokens
+   =========================== */
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --border: #2e3140;
+  --accent: #7c6af7;
+  --accent-hover: #6a59e0;
+  --success: #4caf85;
+  --danger: #e05c5c;
+  --warning: #e09850;
+  --text-primary: #e8eaf0;
+  --text-muted: #7a7f96;
+  --radius: 10px;
+}
+
+/* ===========================
+   Reset & Base
+   =========================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+input, button, textarea {
+  font-family: inherit;
+  line-height: inherit;
+}
+
+/* ===========================
+   App Shell
+   =========================== */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1.5rem;
+}
+
+/* ===========================
+   Shared Button Styles
+   =========================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background 0.15s, opacity 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.btn-ghost:hover {
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
+.btn-icon {
+  padding: 0.3rem 0.45rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.btn-icon:hover {
+  background: var(--border);
+  border-color: var(--border);
+}
+
+.btn-danger:hover {
+  background: color-mix(in srgb, var(--danger) 20%, transparent);
+  border-color: var(--danger);
+}
