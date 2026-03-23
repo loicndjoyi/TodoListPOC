@@ -1,5 +1,4 @@
-import { Component, inject, OnInit, signal, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectionStrategy, inject, OnInit, signal, computed } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 import { Todo } from '../../models/todo.model';
 import { TodoFormComponent } from '../todo-form/todo-form.component';
@@ -7,10 +6,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-todo-list',
-  standalone: true,
-  imports: [CommonModule, TodoFormComponent],
+  imports: [TodoFormComponent],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoListComponent implements OnInit {
   private readonly todoService = inject(TodoService);
@@ -79,7 +78,7 @@ export class TodoListComponent implements OnInit {
       next: () =>
         this.todos.update(list =>
           list.map(t =>
-            t.id === todo.id ? { ...t, isCompleted: !t.isCompleted, completedAt: !t.isCompleted ? new Date().toISOString() : null } : t
+            t.id === todo.id ? { ...t, isCompleted: !t.isCompleted, completedAt: !t.isCompleted ? 'pending' : null } : t
           )
         ),
       error: () => this.errorMessage.set('Failed to update todo status.'),

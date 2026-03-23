@@ -1,19 +1,20 @@
 import {
   Component,
+  ChangeDetectionStrategy,
   input,
   output,
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-todo-form',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './todo-form.component.html',
   styleUrl: './todo-form.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoFormComponent implements OnChanges {
   readonly initialTitle = input('');
