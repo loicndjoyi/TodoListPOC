@@ -1,5 +1,7 @@
 # To-Do List POC
 
+🌍 **Live Demo:** [https://todoapp-loic-b5aha8gnfdamhxc4.canadacentral-01.azurewebsites.net/](https://todoapp-loic-b5aha8gnfdamhxc4.canadacentral-01.azurewebsites.net/)
+
 A full-stack To-Do List built as a **Proof of Concept** showcasing modern software engineering practices across .NET 8 and Angular 21.
 
 ## Architecture & Engineering Practices
