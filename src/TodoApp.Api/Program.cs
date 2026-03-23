@@ -56,6 +56,13 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// Automatically apply EF Core migrations on startup
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    context.Database.Migrate(); // Apply pending migrations and create the schema securely
+}
+
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler(); // <-- Added global error handling middleware
 
